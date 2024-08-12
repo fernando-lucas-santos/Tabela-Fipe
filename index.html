@@ -9,34 +9,41 @@
 <body>
     <h1>Tabela Fipe</h1>
     <form action="">
-        <div class="type">
+        <div class="type_vehicle">
             <label for="vehicle">Selecione o Tipo de Veículo</label><br>
 
-            <input type="radio" name="select" id="cars">
+            <input type="radio" name="select" id="cars" checked>
             <label for="cars">Carro</label> 
 
             <input type="radio" name="select" id="motorcycle">
             <label for="motorcycle"> Moto</label >
 
             <input type="radio" name="select" id="truck">
-            <label for="cars">Caminhão</label>    
+            <label for="truck">Caminhão</label>    
     
         </div>
-        
-        <label for="name">Nome Veiculo:</label> <br>
-        <input type="text" id="name" required>
-        <select name="select" title="Nome veiculo" id="select" >
-            
-        </select>
-        <br>
-        <label for="brand">Marca Veiculo:</label> <br>
-        <input type="text" id="brand" required>
-        <select name="select" id="select" title="marcas">
-            <option value="">hahahahahah</option>
-            <option value="" selected> kkkkk</option>
-            <option value="">rsrsrsrsrs</option>
-        </select>
-        <br>
+
+        <div class="info_vehicle">
+            <label for="name">Nome Veiculo:</label> <br>
+            <input type="text" id="name" required>
+
+            <select name="select" title="Marca Veiculo" id="select" >
+                <option value="" selected > --Selecione--</option>  
+            </select>
+            <select name="select" title="Marca Veiculo" id="select" >
+                <option value="" selected > --Ano--</option>  
+            </select>
+            <br>
+
+            <label for="brand">Modelo Veiculo:</label> <br>
+            <input type="text" id="brand" required>
+            <select name="select" id="select" title="Modelo Veiculo">
+                <option value="" selected > --Selecione--</option>
+            </select>
+            <select name="select" id="select" title="Modelo Veiculo">
+                <option value="" selected > --Ano--</option>
+            </select>
+        </div>
         <br>
         <button class="verificar">Verificar</button>
 
