@@ -1,141 +1,89 @@
-let menuSelct = document.querySelectorAll('#select')
-let btnCheck = document.querySelector('.verificar')
-let type_vehicle = [...document.querySelectorAll('.type_vehicle input')]
-let addressUrl = ''
-let models = ''
-// let models = `https://parallelum.com.br/fipe/api/v1/${type}/marcas/${n1}/modelos`
+let input_type = [...document.querySelectorAll('input[type="radio"]')]
+let input_vehicle_name = document.querySelector('#name')
+let select_name = document.querySelector('#Select_name')
+let model = document.querySelector('#model')
+let select_brand = document.querySelector('#select-brand')
+let verificar = document.querySelector('.verificar')
+let year = document.querySelector('#year')
+let description = document.querySelector('.description')
 
-const vehicle_brand = (url)=>{
-    fetch(url)
-    .then((resp)=> resp.json())
-    .then((data)=>{
-        data.map((el,index)=>{
-            let opc = document.createElement('option')
-            opc.setAttribute('value' , index)
-            opc.innerHTML = el.nome
-            menuSelct[0].appendChild(opc)
+
+// função recebe o tipo de veiculo
+const tipo = (tipos)=>{
+    fetch(`https://parallelum.com.br/fipe/api/v1/${tipos}/marcas`)
+    .then(response => response.json())
+    .then(data =>{
+        data.map((el)=>{
+            let opt = document.createElement('option')
+            opt.setAttribute('value', el.codigo)
+            opt.innerHTML =  el.nome
+            select_name.appendChild(opt)
+
         })
-    
+        select_name.addEventListener('change',()=>{
+            input_vehicle_name.value = select_name.options[select_name.selectedIndex].text //pega o valor do opt que estiver selected
+            model.innerHTML = '<option value="01" selected > --selecione--</option>'
+            modelo(tipos,select_name.value)
+            if(select_name.value === '01'){
+                input_vehicle_name.value = ''
+            }
+        })
+         
     })
 }
-const model = (position)=>{
-    fetch(models)
-    .then((resp)=>resp.json())
-    .then((data)=>{
-        data.map((el,index)=>{
-            let opc = document.createElement('option')
-            opc.setAttribute('value' , index)
-            opc.innerHTML = el.nome
-            menuSelct[1].appendChild(opc)
+// função recebe o tipo de veiculo e o modelo
+const modelo = (tipo,Nm)=>{
+    fetch(`https://parallelum.com.br/fipe/api/v1/${tipo}/marcas/${Nm}/modelos`)
+    .then(response => response.json())
+    .then(data =>{
+        data.modelos.map((el)=>{
+            let opt = document.createElement('option')
+            opt.setAttribute('value', el.codigo)
+            opt.innerHTML =  el.nome
+            model.appendChild(opt)
+            
+        })
+        model.addEventListener('change',()=>{
+            year.innerHTML = '<option value="" selected >--Ano--</option>'
+           let optsValue = model.value
+           ano(tipo,Nm,optsValue)  
         })
     })
 }
-
-const year = (url)=>{
-    fetch(url)
-    .then((Rsponse)=>Rsponse)
-    .then((data)=>{
-        console.log(data)
+// função recebe o tipo de veiculo o modelo e o ano
+const ano = (tipo,Nm,Nmodelo)=>{
+    fetch(`https://parallelum.com.br/fipe/api/v1/${tipo}/marcas/${Nm}/modelos/${Nmodelo}/anos`)
+    .then(response => response.json())
+    .then(data =>{
+        data.map((el)=>{
+            let opt = document.createElement('option')
+            opt.innerHTML =  el.nome
+            year.appendChild(opt)
+        })
+        
     })
 }
 
-
-let input_checked = type_vehicle.filter((el)=>{
-    return el.checked
-})
-
-input_checked[0].checked
-type_vehicle.map((el)=>{
-    el.addEventListener('click',()=>{
-        if(el.id == 'cars' && input_checked[0].checked){
-            addressUrl = 'https://parallelum.com.br/fipe/api/v1/carros/marcas'
-            vehicle_brand(addressUrl)
-        }else if(el.id == 'motorcycle'){
-            addressUrl = 'https://parallelum.com.br/fipe/api/v1/motos/marcas'
-            vehicle_brand(addressUrl)
+input_type.map((el)=>{
+    el.addEventListener('click',(evt)=>{
+        if(evt.target.id == 'cars'){
+            select_name.innerHTML = '<option value="01" selected > --selecione--</option>'
+            model.innerHTML = '<option value="01" selected > --selecione--</option>'
+            year.innerHTML = '<option value="" selected >--Ano--</option>'
+            tipo('carros')
+          
+        }else if(evt.target.id == 'motorcycle'){
+            select_name.innerHTML = '<option value="01" selected > --selecione--</option>'
+            model.innerHTML = '<option value="01" selected > --selecione--</option>'
+            year.innerHTML = '<option value="" selected >--Ano--</option>'
+            tipo('motos')
         }else{
-            addressUrl = 'https://parallelum.com.br/fipe/api/v1/caminhoes/marcas'
-            vehicle_brand(addressUrl)
+            select_name.innerHTML = '<option value="01" selected > --selecione--</option>'
+            model.innerHTML = '<option value="01" selected > --selecione--</option>'
+            year.innerHTML = '<option value="" selected >--Ano--</option>'
+            tipo('caminhoes')
         }
     })
-
 })
 
 
-
-
-
-
-//vehicle()
-/*
-
-const cars = (url)=>{
-    const url = 'https://parallelum.com.br/fipe/api/v1/carros/marcas'
-    fetch(url)
-    .then((resp)=> resp.json())
-    .then((data)=>{
-        data.map((el,index)=>{
-            let opc = document.createElement('option')
-            opc.setAttribute('value' , index)
-            opc.innerHTML = el.nome
-            menuSelct.appendChild(opc)
-            
-            //console.log(el.nome)
-        })
-    })
-
-    const brand = (c)=>{
-        //const url = 'https://parallelum.com.br/fipe/api/v1/carros/marcas'
-        // fetch(url)
-        // .then((resp)=> resp.json())
-        // .then((data)=>{
-        //     data.map((el,index)=>{
-        //         let opc = document.createElement('option')
-        //         opc.setAttribute('value' , index)
-        //         opc.innerHTML = el.nome
-        //         menuSelct.appendChild(opc)
-                
-        //         //console.log(el.nome)
-        //     })
-        // })
-    }
-    console.log(el.nome)
-}
-
-const motorcycle = ()=>{
-    const url = 'https://parallelum.com.br/fipe/api/v1/motos/marcas'
-    fetch(url)
-    .then((resp)=> resp.json())
-    .then((data)=>{
-        data.map((el,index)=>{
-            let opc = document.createElement('option')
-            opc.setAttribute('value' , index)
-            opc.innerHTML = el.nome
-            menuSelct.appendChild(opc)
-            
-            //console.log(el.nome)
-        })
-    })
-}
-const truck = ()=>{
-    const url = 'https://parallelum.com.br/fipe/api/v1/caminhoes/marcas'
-    fetch(url)
-    .then((resp)=> resp.json())
-    .then((data)=>{
-        data.map((el,index)=>{
-            let opc = document.createElement('option')
-            opc.setAttribute('value' , index)
-            opc.innerHTML = el.nome
-            menuSelct.appendChild(opc)
-            
-            console.log(el.nome)
-        })
-    })
-
-}
-
-btnCheck.addEventListener('click',(evt)=>{
-    evt.preventDefault()
-    
-})
-*/
