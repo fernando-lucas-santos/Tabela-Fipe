@@ -29,11 +29,11 @@
             <input type="text" id="name" required>
 
             <select name="select" title="Montadora" id="Select_name" >
-                <option value="01" selected > --selecione--</option>
+                <option value="" selected > --Selecione--</option>
             </select> <br>
 
             <label for="brand">Modelo Veiculo:</label> <br>
-            <select type="text" title="Modelo Veiculo" id="model"> 
+            <select  name="select" title="Modelo Veiculo" id="model"> 
                 <option value="" selected > --Selecione--</option>  
             </select>
 
@@ -45,14 +45,12 @@
         <br>
         <button class="verificar">Verificar</button>
 
+        <div class="description">
+            <p>Descrição: <span></span></p> 
+
+        </div>
     </form>
-    <div class="description">
-        <p>Descrição: <span></span></p> 
-
-
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="api.js" type="module"></script>
     <script src="script.js" type="module"></script>
 </body>
 </html>
