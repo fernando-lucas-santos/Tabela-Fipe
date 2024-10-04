@@ -1,0 +1,11 @@
+#name{
+    /* text-transform: uppercase; */
+}
+.tt::after{
+    content:'foi';
+    color: red;
+    font-size: 0.8rem;
+    
+    
+    
+}
