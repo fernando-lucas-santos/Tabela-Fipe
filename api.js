@@ -77,3 +77,4 @@ class fipe {
 
 */
 export { fipe }
+
