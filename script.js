@@ -6,7 +6,7 @@ let select_name = document.querySelector('#Select_name')
 let model = document.querySelector('#model')
 let verificar = document.querySelector('.verificar')
 let year = document.querySelector('#year')
- console.log(select_name)
+ 
 let tipoV = null
 let Nmarca = null
 let Nmodelo = null
@@ -31,7 +31,19 @@ const chamada2 = (tipoV)=>{
     */
 
 // função recebe o tipo de veiculo e o modelo
+   /* select_name.addEventListener('change',()=>{ // montadora
+    //input_vehicle_name.value = select_name.options[select_name.selectedIndex].text //pega o valor do opt que estiver selected
+    //model.innerHTML = '<option value="" selected >--Selecione--</option>'
+    //year.innerHTML = '<option value="" selected >--Ano--</option>'
+    //Nmodelo = select_name.value // pega o numero do veiculo que esta no value do opt
+    console.log('foi')
+    if(select_name.value === '01'){
+        input_vehicle_name.value = ''
+    }
 
+ //modelo(tipoV,Nmodelo)
+
+})*/
 
 // eventos de click que seleciona o tipo de veiculo
 input_type.map((el)=>{
@@ -41,7 +53,7 @@ input_type.map((el)=>{
             model.innerHTML = '<option value="001" selected > --selecione--</option>'
             year.innerHTML = '<option value="" selected >--Ano--</option>'
             tipoV = 'carros'
-            api.type(tipoV,select_name)
+            api.fipe.type(tipoV)
 
             
             //input_vehicle_name.toggleAttribute('disabled')
