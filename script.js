@@ -2,7 +2,7 @@ import * as api from "./api.js"
 
 let input_type = [...document.querySelectorAll('input[type="radio"]')]
 let btnInfo = document.querySelector('.btnInfo')
-let description = document.querySelector('.description span')
+let description = document.querySelector('.description')
 let tipoV = null
 
 // eventos de click que seleciona o tipo de veiculo
