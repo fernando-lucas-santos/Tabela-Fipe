@@ -1,11 +1,16 @@
-#name{
-    /* text-transform: uppercase; */
+form{
+    max-width: 700px;
 }
-.tt::after{
-    content:'foi';
-    color: red;
-    font-size: 0.8rem;
-    
-    
-    
+.type_vehicle{
+    margin-bottom: 20px !important;
+}
+#model{
+  margin-right: 10px;  
+
+}
+.description p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
 }

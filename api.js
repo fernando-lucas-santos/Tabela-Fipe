@@ -1,12 +1,12 @@
-let select_name = document.querySelector("#Select_name")
-let model = document.querySelector("#model")
-
-let year = document.querySelector("#year")
-let verificar = document.querySelector(".verificar")
-//console.log(teste)
-//console.log(model)
 class fipe {
-  static controle = false
+  static Nmark = null
+  static Nmodel = null
+  static Nyear = null
+
+  static select_name = document.querySelector("#Select_name")
+  static model = document.querySelector("#model")
+  static ayear = document.querySelector("#year")
+
   static type = async function (type) {
     const response = await fetch(
       `https://parallelum.com.br/fipe/api/v1/${type}/marcas`
@@ -16,18 +16,18 @@ class fipe {
       let opt = document.createElement("option")
       opt.setAttribute("value", el.codigo)
       opt.innerHTML = el.nome
-      select_name.appendChild(opt)
+      fipe.select_name.appendChild(opt)
+  
     });
-
-    select_name.addEventListener("change", () => {
-      // montadora
-      //select_name.options[select_name.selectedIndex].text //pega o valor do opt que estiver selected
-      model.innerHTML = '<option value="" selected >--Selecione--</option>';
-      year.innerHTML = '<option value="" selected >--Ano--</option>';
-      fipe.modelo(type, select_name.value);
-      fipe.controle = true;
-      
+    
+    fipe.select_name.addEventListener("change", () => {
+      fipe.model.innerHTML = '<option value="" selected >--Selecione--</option>';
+      fipe.year.innerHTML = '<option value="" selected >--Ano--</option>';
+      fipe.modelo(type, fipe.select_name.value);
+      fipe.Nmark = fipe.select_name.value
+  
     })
+    
   }
 
   static modelo = async function (type, Nmark) {
@@ -40,41 +40,59 @@ class fipe {
       let opt = document.createElement("option")
       opt.setAttribute("value", el.codigo)
       opt.innerHTML = el.nome;
-      model.appendChild(opt)
+      fipe.model.appendChild(opt)
     })
-
-    model.addEventListener("change", (evt) => {
-        year.innerHTML = '<option value="" selected >--Ano--</option>'
-        fipe.year(type, Nmark, model.options[model.selectedIndex].value)
-        fipe.controle = false
-        
+     
+    fipe.model.addEventListener("change", (evt) => {
+      fipe.ayear.innerHTML = '<option value="" selected >--Ano--</option>';
+      fipe.year(type, Nmark, model.options[fipe.model.selectedIndex].value)
+      fipe.Nmodel = model.options[fipe.model.selectedIndex].value
     })
+    
   }
 
   static year = async function (type, Nmark, Nmod) {
 
-      try {
-          const response = await fetch(`https://parallelum.com.br/fipe/api/v1/${type}/marcas/${Nmark}/modelos/${Nmod}/anos`)
-        const data = await response.json();
-            data.map((el) => {
-              let opt = document.createElement("option")
-              opt.setAttribute("value", el.codigo)
-              opt.innerHTML = el.nome
-              year.appendChild(opt)
-            });
+    try {
+      const response = await fetch(`https://parallelum.com.br/fipe/api/v1/${type}/marcas/${Nmark}/modelos/${Nmod}/anos`)
+      const data = await response.json();
+
+      data.map((el) => {
+        let opt = document.createElement("option")
+        opt.setAttribute("value", el.codigo)
+        opt.innerHTML = el.nome
+        fipe.ayear.appendChild(opt)
+      })
+
+      fipe.ayear.addEventListener("input", (evt) => {
+        fipe.Nyear = fipe.ayear.options[fipe.ayear.selectedIndex].value
+  
+      })
         
     } catch (error) {
-        
+      
     }
    
   }
+  static info = async function(type,Nmarca,Nmod,Nyear,location) {
+    const response = await fetch(`https://parallelum.com.br/fipe/api/v1/${type}/marcas/${Nmarca}/modelos/${Nmod}/anos/${Nyear}`)
+    const data = await response.json()
+    
+    Object.keys(data).forEach((item)=>{
+      let ul = document.createElement('ul')
+      let li = document.createElement('li')
+      ul.setAttribute('class', ('list-group list-group-flush'))
+      li.setAttribute('class', 'list-group-item')
+      li.innerHTML = `${item}: ${data[item]}`
+      ul.appendChild(li)
+
+      location.appendChild(ul)
+    
+    })
+
+  }
 }
 
-/*
 
-
-// função recebe o tipo de veiculo o modelo e o ano
-
-*/
 export { fipe }
 
