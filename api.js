@@ -78,6 +78,7 @@ class fipe {
     const response = await fetch(`https://parallelum.com.br/fipe/api/v1/${type}/marcas/${Nmarca}/modelos/${Nmod}/anos/${Nyear}`)
     const data = await response.json()
     
+    
     Object.keys(data).forEach((item)=>{
       let ul = document.createElement('ul')
       let li = document.createElement('li')
@@ -89,6 +90,7 @@ class fipe {
       location.appendChild(ul)
     
     })
+    
 
   }
 }

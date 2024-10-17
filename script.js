@@ -35,6 +35,7 @@ input_type.map((el)=>{
 
 btnInfo.addEventListener('click',(evt)=>{
     evt.preventDefault()
+    description.innerHTML = '<p>Descrição:</p> '
     api.fipe.info(tipoV,api.fipe.Nmark,api.fipe.Nmodel,api.fipe.Nyear, description)
     
 })
