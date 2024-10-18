@@ -12,17 +12,24 @@
     <form action="" >
         
         <div Class="form-group">
-            <div class="type_vehicle form-check">
+            <div class="type_vehicle form-check d-flex flex-column justify-content-around">
                 <h2>Selecione o tipo de Veiculo</h2><br>
+                <div class="d-flex  justify-content-around">
+                    <div>
+                        <input type="radio" name="select" id="cars" class="form-check-input">
+                        <label class="form-check-label" for="cars">Carro</label> 
+                    </div>
+                    <div>
+                        <input type="radio" name="select" id="motorcycle">
+                        <label for="motorcycle"> Moto</label >
 
-                <input type="radio" name="select" id="cars" class="form-check-input">
-                <label class="form-check-label" for="cars">Carro</label> 
-    
-                <input type="radio" name="select" id="motorcycle">
-                <label for="motorcycle"> Moto</label >
-    
-                <input type="radio" name="select" id="truck" >
-                <label for="truck">Caminhão</label>    
+                    </div>
+                    <div>
+                        <input type="radio" name="select" id="truck" >
+                        <label for="truck">Caminhão</label>      
+                    </div>
+                </div>
+                
         
             </div>
     
